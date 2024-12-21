@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Saques</title>
+</head>
+<body>
+    <h1>Saques</h1>
+    <h3>Total de Saques Com Status "Complete": R$ {{ total_saques_completo }}</h3>
+    
+    <table border="1">
+        <thead>
+            <tr>
+                <th>Data</th>
+                <th>ID</th>
+                <th>Tipo</th>
+                <th>Quantia</th>
+                <th>Status</th>
+                <th>Nota</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for saque in saques %}
+            <tr>
+                <td>{{ saque.data }}</td>
+                <td>{{ saque.id }}</td>
+                <td>{{ saque.tipo }}</td>
+                <td>{{ saque.quantia }}</td>
+                <td>{{ saque.status }}</td>
+                <td>{{ saque.nota }}</td>
+            </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+</body>
+</html>

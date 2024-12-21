@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Gráfico de Multiplicadores</title>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+</head>
+<body>
+    <h1>Gráfico de Multiplicadores</h1>
+    <canvas id="graficoMultiplicadores" width="800" height="400"></canvas>
+    <script>
+        const ctx = document.getElementById('graficoMultiplicadores').getContext('2d');
+        
+        // Dados vindos do servidor Flask
+        const dados = {{ dados | tojson }};
+        
+        // Preparar dados para o gráfico
+        const labels = dados.map(item => item.data_hora); // Datas e horas no eixo X
+        const valores = dados.map(item => item.multiplicador); // Multiplicadores no eixo Y
+
+        // Configurar o gráfico
+        new Chart(ctx, {
+            type: 'line',
+            data: {
+                labels: labels,
+                datasets: [{
+                    label: 'Multiplicadores',
+                    data: valores,
+                    borderColor: 'rgba(75, 192, 192, 1)',
+                    borderWidth: 2,
+                    fill: false
+                }]
+            },
+            options: {
+                responsive: true,
+                scales: {
+                    x: {
+                        title: {
+                            display: true,
+                            text: 'Data e Hora'
+                        }
+                    },
+                    y: {
+                        title: {
+                            display: true,
+                            text: 'Multiplicador'
+                        },
+                        beginAtZero: true
+                    }
+                }
+            }
+        });
+    </script>
+</body>
+</html>
